@@ -1,0 +1,2068 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Viviane no mundo da programação</title>
+
+
+    <style>
+
+        /* =====================================================
+           CONFIGURAÇÕES GERAIS
+        ====================================================== */
+
+        * {
+            box-sizing: border-box;
+        }
+
+
+        :root {
+
+            --fundo-1: #f8fafc;
+            --fundo-2: #eaf1ff;
+
+            --card: rgba(255, 255, 255, 0.82);
+
+            --texto: #334155;
+            --texto-forte: #0f172a;
+
+            --azul: #173d7a;
+            --azul-claro: #3b82f6;
+
+            --borda: rgba(255, 255, 255, 0.9);
+
+            --sombra:
+                0 25px 60px rgba(15, 23, 42, 0.12);
+        }
+
+
+        body.dark {
+
+            --fundo-1: #0f172a;
+            --fundo-2: #18253d;
+
+            --card: rgba(30, 41, 59, 0.82);
+
+            --texto: #cbd5e1;
+            --texto-forte: #f8fafc;
+
+            --azul: #60a5fa;
+            --azul-claro: #93c5fd;
+
+            --borda: rgba(255, 255, 255, 0.08);
+
+            --sombra:
+                0 25px 60px rgba(0, 0, 0, 0.35);
+        }
+
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+
+        body {
+
+            margin: 0;
+
+            min-height: 100vh;
+
+            font-family:
+                Arial,
+                Helvetica,
+                sans-serif;
+
+            color:
+                var(--texto);
+
+            background:
+
+                radial-gradient(
+                    circle at 10% 15%,
+                    rgba(96, 165, 250, 0.35),
+                    transparent 32%
+                ),
+
+                radial-gradient(
+                    circle at 90% 85%,
+                    rgba(99, 102, 241, 0.25),
+                    transparent 35%
+                ),
+
+                linear-gradient(
+                    135deg,
+                    var(--fundo-1),
+                    var(--fundo-2)
+                );
+
+            transition:
+                background 0.5s,
+                color 0.5s;
+
+            overflow-x: hidden;
+        }
+
+
+
+        /* =====================================================
+           FUNDO ANIMADO
+        ====================================================== */
+
+        body::before {
+
+            content: "";
+
+            position: fixed;
+
+            width: 420px;
+            height: 420px;
+
+            top: -160px;
+            right: -100px;
+
+            border-radius: 50%;
+
+            background:
+                rgba(59, 130, 246, 0.14);
+
+            filter: blur(30px);
+
+            animation:
+                moverFundo 9s ease-in-out infinite alternate;
+
+            pointer-events: none;
+        }
+
+
+        @keyframes moverFundo {
+
+            from {
+
+                transform:
+                    translate(0, 0)
+                    scale(1);
+
+            }
+
+            to {
+
+                transform:
+                    translate(-70px, 70px)
+                    scale(1.2);
+
+            }
+
+        }
+
+
+
+        /* =====================================================
+           TOPO
+        ====================================================== */
+
+        .topo {
+
+            position: absolute;
+
+            top: 0;
+            left: 0;
+
+            width: 100%;
+
+            padding:
+                25px
+                35px;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: space-between;
+
+            z-index: 10;
+        }
+
+
+        .logo-dotiva {
+
+            width: 155px;
+
+            height: auto;
+        }
+
+
+
+        /* =====================================================
+           BOTÃO DE TEMA
+        ====================================================== */
+
+        .botao-tema {
+
+            width: 48px;
+            height: 48px;
+
+            border:
+                1px solid
+                var(--borda);
+
+            border-radius:
+                14px;
+
+            background:
+                var(--card);
+
+            color:
+                var(--texto-forte);
+
+            font-size:
+                21px;
+
+            cursor:
+                pointer;
+
+            box-shadow:
+                0 8px 20px
+                rgba(15, 23, 42, 0.08);
+
+            transition:
+                0.3s;
+        }
+
+
+        .botao-tema:hover {
+
+            transform:
+                translateY(-3px)
+                rotate(6deg);
+        }
+
+
+
+        /* =====================================================
+           PÁGINA
+        ====================================================== */
+
+        .pagina {
+
+            width: 100%;
+
+            min-height: 100vh;
+
+            padding:
+                125px
+                20px
+                55px;
+
+            display: flex;
+
+            justify-content:
+                center;
+        }
+
+
+        .container {
+
+            width: 100%;
+
+            max-width:
+                850px;
+
+            padding:
+                60px
+                50px;
+
+            text-align:
+                center;
+
+            background:
+                var(--card);
+
+            border:
+                1px solid
+                var(--borda);
+
+            border-radius:
+                30px;
+
+            box-shadow:
+                var(--sombra);
+
+            backdrop-filter:
+                blur(18px);
+
+            -webkit-backdrop-filter:
+                blur(18px);
+
+            animation:
+                subir 0.9s ease both;
+
+            transition:
+                background 0.5s,
+                box-shadow 0.5s;
+        }
+
+
+
+        /* =====================================================
+           TEXTO PRINCIPAL
+        ====================================================== */
+
+        .intro {
+
+            font-size:
+                clamp(
+                    23px,
+                    3vw,
+                    32px
+                );
+
+            line-height:
+                1.45;
+
+            color:
+                var(--texto);
+        }
+
+
+        #viviane {
+
+            display: block;
+
+            margin:
+                9px
+                0;
+
+            min-height:
+                96px;
+
+            font-size:
+                clamp(
+                    50px,
+                    9vw,
+                    82px
+                );
+
+            line-height:
+                1.1;
+
+            font-weight:
+                800;
+
+            letter-spacing:
+                -2px;
+
+            color:
+                var(--azul);
+
+            text-shadow:
+                0 0 30px
+                rgba(59, 130, 246, 0.15);
+
+            transition:
+                0.4s;
+        }
+
+
+        #viviane.brilho {
+
+            text-shadow:
+
+                0 0 8px
+                rgba(59, 130, 246, 0.35),
+
+                0 0 25px
+                rgba(59, 130, 246, 0.25),
+
+                0 0 50px
+                rgba(59, 130, 246, 0.18);
+
+            transform:
+                scale(1.025);
+        }
+
+
+        .subtitulo {
+
+            margin-top:
+                20px;
+
+            font-size:
+                16px;
+
+            color:
+                var(--texto);
+
+            opacity:
+                0.75;
+
+            letter-spacing:
+                0.4px;
+        }
+
+
+
+        /* =====================================================
+           CALENDÁRIO
+        ====================================================== */
+
+        .area-calendario {
+
+            margin-top:
+                55px;
+
+            padding:
+                28px;
+
+            background:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.38
+                );
+
+            border:
+                1px solid
+                var(--borda);
+
+            border-radius:
+                22px;
+
+            text-align:
+                left;
+        }
+
+
+        body.dark
+        .area-calendario {
+
+            background:
+                rgba(
+                    15,
+                    23,
+                    42,
+                    0.30
+                );
+        }
+
+
+        .titulo-secao {
+
+            margin:
+                0
+                0
+                22px;
+
+            text-align:
+                center;
+
+            font-size:
+                12px;
+
+            font-weight:
+                700;
+
+            letter-spacing:
+                2.5px;
+
+            text-transform:
+                uppercase;
+
+            color:
+                var(--texto);
+
+            opacity:
+                0.65;
+        }
+
+
+        .calendario-controles {
+
+            display:
+                grid;
+
+            grid-template-columns:
+                42px 42px 1fr 42px 42px;
+
+            align-items:
+                center;
+
+            gap:
+                8px;
+
+            margin-bottom:
+                24px;
+        }
+
+
+        .calendario-controles h2 {
+
+            margin:
+                0;
+
+            text-align:
+                center;
+
+            font-size:
+                20px;
+
+            color:
+                var(--texto-forte);
+
+            text-transform:
+                capitalize;
+        }
+
+
+        .calendario-controles button {
+
+            width:
+                42px;
+
+            height:
+                42px;
+
+            border:
+                none;
+
+            border-radius:
+                11px;
+
+            background:
+                var(--azul);
+
+            color:
+                white;
+
+            font-size:
+                21px;
+
+            cursor:
+                pointer;
+
+            transition:
+                0.2s;
+
+            box-shadow:
+                0 6px 16px
+                rgba(23, 61, 122, 0.18);
+        }
+
+
+        .calendario-controles button:hover {
+
+            transform:
+                translateY(-2px);
+
+            opacity:
+                0.88;
+        }
+
+
+        .dias-semana {
+
+            display:
+                grid;
+
+            grid-template-columns:
+                repeat(7, 1fr);
+
+            margin-bottom:
+                8px;
+
+            text-align:
+                center;
+
+            font-size:
+                12px;
+
+            font-weight:
+                700;
+
+            color:
+                var(--texto);
+
+            opacity:
+                0.7;
+        }
+
+
+        .dias-calendario {
+
+            display:
+                grid;
+
+            grid-template-columns:
+                repeat(7, 1fr);
+
+            gap:
+                6px;
+        }
+
+
+        .dia {
+
+            min-height:
+                58px;
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                center;
+
+            border-radius:
+                10px;
+
+            font-size:
+                14px;
+
+            color:
+                var(--texto-forte);
+
+            transition:
+                0.2s;
+        }
+
+
+        .dia:not(.vazio):hover {
+
+            background:
+                rgba(59, 130, 246, 0.10);
+
+            cursor:
+                default;
+        }
+
+
+        .dia.hoje {
+
+            background:
+                var(--azul);
+
+            color:
+                white;
+
+            font-weight:
+                700;
+
+            box-shadow:
+                0 5px 15px
+                rgba(23, 61, 122, 0.25);
+        }
+
+
+        .dia.vazio {
+
+            pointer-events:
+                none;
+        }
+
+
+
+        /* =====================================================
+           RELÓGIO
+        ====================================================== */
+
+        .relogio-container {
+
+            margin-top:
+                45px;
+        }
+
+
+        .relogio-titulo {
+
+            font-size:
+                12px;
+
+            font-weight:
+                700;
+
+            text-transform:
+                uppercase;
+
+            letter-spacing:
+                2.5px;
+
+            color:
+                var(--texto);
+
+            opacity:
+                0.6;
+
+            margin-bottom:
+                10px;
+        }
+
+
+        #relogio {
+
+            font-size:
+                clamp(
+                    30px,
+                    6vw,
+                    42px
+                );
+
+            font-weight:
+                700;
+
+            letter-spacing:
+                3px;
+
+            color:
+                var(--texto-forte);
+        }
+
+
+        #data {
+
+            margin-top:
+                7px;
+
+            font-size:
+                16px;
+
+            color:
+                var(--texto);
+
+            opacity:
+                0.75;
+        }
+
+
+
+        /* =====================================================
+           REDES SOCIAIS
+        ====================================================== */
+
+        .redes-sociais {
+
+            margin-top:
+                38px;
+
+            display:
+                flex;
+
+            justify-content:
+                center;
+
+            align-items:
+                center;
+
+            gap:
+                12px;
+
+            flex-wrap:
+                wrap;
+        }
+
+
+        .rede {
+
+            height:
+                50px;
+
+            padding:
+                0
+                18px;
+
+            border-radius:
+                13px;
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            gap:
+                9px;
+
+            text-decoration:
+                none;
+
+            color:
+                white;
+
+            font-weight:
+                600;
+
+            font-size:
+                14px;
+
+            transition:
+                0.3s;
+
+            box-shadow:
+                0 8px 20px
+                rgba(15, 23, 42, 0.12);
+        }
+
+
+        .rede:hover {
+
+            transform:
+                translateY(-5px);
+
+            box-shadow:
+                0 15px 28px
+                rgba(15, 23, 42, 0.18);
+        }
+
+
+        .linkedin {
+
+            background:
+                #0a66c2;
+        }
+
+
+        .instagram {
+
+            background:
+
+                radial-gradient(
+                    circle at 30% 110%,
+                    #fdf497 0%,
+                    #fd5949 45%,
+                    #d6249f 65%,
+                    #285aeb 95%
+                );
+        }
+
+
+        .rede svg {
+
+            width:
+                23px;
+
+            height:
+                23px;
+
+            fill:
+                white;
+        }
+
+
+
+        /* =====================================================
+           RODAPÉ
+        ====================================================== */
+
+        footer {
+
+            margin-top:
+                50px;
+
+            padding-top:
+                25px;
+
+            border-top:
+                1px solid
+                rgba(
+                    100,
+                    116,
+                    139,
+                    0.18
+                );
+
+            font-size:
+                13px;
+
+            color:
+                var(--texto);
+
+            opacity:
+                0.6;
+        }
+
+
+
+        /* =====================================================
+           ANIMAÇÕES
+        ====================================================== */
+
+        @keyframes subir {
+
+            from {
+
+                opacity: 0;
+
+                transform:
+                    translateY(30px);
+
+            }
+
+            to {
+
+                opacity: 1;
+
+                transform:
+                    translateY(0);
+
+            }
+
+        }
+
+
+
+        /* =====================================================
+           TABLET
+        ====================================================== */
+
+        @media
+        (max-width: 900px) {
+
+            .topo {
+
+                padding:
+                    22px
+                    25px;
+            }
+
+
+            .logo-dotiva {
+
+                width:
+                    140px;
+            }
+
+
+            .container {
+
+                padding:
+                    50px
+                    35px;
+            }
+
+        }
+
+
+
+        /* =====================================================
+           CELULAR
+        ====================================================== */
+
+        @media
+        (max-width: 600px) {
+
+            .topo {
+
+                position:
+                    relative;
+
+                padding:
+                    20px
+                    18px
+                    5px;
+            }
+
+
+            .logo-dotiva {
+
+                width:
+                    125px;
+            }
+
+
+            .botao-tema {
+
+                width:
+                    43px;
+
+                height:
+                    43px;
+
+                font-size:
+                    18px;
+            }
+
+
+            .pagina {
+
+                min-height:
+                    auto;
+
+                padding:
+                    18px
+                    12px
+                    30px;
+            }
+
+
+            .container {
+
+                padding:
+                    38px
+                    17px;
+
+                border-radius:
+                    22px;
+            }
+
+
+            #viviane {
+
+                min-height:
+                    62px;
+
+                letter-spacing:
+                    -1px;
+            }
+
+
+            .subtitulo {
+
+                font-size:
+                    14px;
+            }
+
+
+            .area-calendario {
+
+                margin-top:
+                    40px;
+
+                padding:
+                    16px
+                    9px;
+            }
+
+
+            .calendario-controles {
+
+                grid-template-columns:
+                    34px 34px 1fr 34px 34px;
+
+                gap:
+                    4px;
+            }
+
+
+            .calendario-controles h2 {
+
+                font-size:
+                    15px;
+            }
+
+
+            .calendario-controles button {
+
+                width:
+                    34px;
+
+                height:
+                    34px;
+
+                font-size:
+                    17px;
+
+                border-radius:
+                    9px;
+            }
+
+
+            .dias-semana {
+
+                font-size:
+                    10px;
+            }
+
+
+            .dias-calendario {
+
+                gap:
+                    3px;
+            }
+
+
+            .dia {
+
+                min-height:
+                    42px;
+
+                font-size:
+                    12px;
+
+                border-radius:
+                    7px;
+            }
+
+
+            .relogio-container {
+
+                margin-top:
+                    38px;
+            }
+
+
+            .rede {
+
+                width:
+                    52px;
+
+                padding:
+                    0;
+
+                justify-content:
+                    center;
+            }
+
+
+            .rede span {
+
+                display:
+                    none;
+            }
+
+        }
+
+
+
+        /* =====================================================
+           ACESSIBILIDADE
+        ====================================================== */
+
+        @media
+        (prefers-reduced-motion: reduce) {
+
+            *,
+            *::before,
+            *::after {
+
+                animation-duration:
+                    0.01ms !important;
+
+                animation-iteration-count:
+                    1 !important;
+
+                transition-duration:
+                    0.01ms !important;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- =====================================================
+         TOPO
+    ====================================================== -->
+
+    <header class="topo">
+
+
+        <img
+            src="https://dotiva.com.br/imagens/logo.png"
+            alt="Logo Dotiva"
+            class="logo-dotiva"
+        >
+
+
+        <button
+            id="botaoTema"
+            class="botao-tema"
+            aria-label="Alternar entre tema claro e escuro"
+            title="Alterar tema"
+        >
+
+            ☾
+
+        </button>
+
+
+    </header>
+
+
+
+    <!-- =====================================================
+         CONTEÚDO
+    ====================================================== -->
+
+    <main class="pagina">
+
+
+        <section class="container">
+
+
+            <!-- TEXTO PRINCIPAL -->
+
+            <div class="intro">
+
+                Seja bem-vinda
+
+                <span id="viviane"></span>
+
+                ao mundo da programação.
+
+            </div>
+
+
+            <div class="subtitulo">
+
+                Meu primeiro projeto publicado na web.
+
+            </div>
+
+
+
+            <!-- =================================================
+                 CALENDÁRIO
+            ================================================== -->
+
+            <div class="area-calendario">
+
+
+                <div class="titulo-secao">
+
+                    Calendário
+
+                </div>
+
+
+                <div class="calendario-controles">
+
+
+                    <button
+                        id="anoAnterior"
+                        title="Ano anterior"
+                        aria-label="Ano anterior"
+                    >
+                        «
+                    </button>
+
+
+                    <button
+                        id="mesAnterior"
+                        title="Mês anterior"
+                        aria-label="Mês anterior"
+                    >
+                        ‹
+                    </button>
+
+
+                    <h2 id="tituloCalendario"></h2>
+
+
+                    <button
+                        id="mesSeguinte"
+                        title="Próximo mês"
+                        aria-label="Próximo mês"
+                    >
+                        ›
+                    </button>
+
+
+                    <button
+                        id="anoSeguinte"
+                        title="Próximo ano"
+                        aria-label="Próximo ano"
+                    >
+                        »
+                    </button>
+
+
+                </div>
+
+
+                <div class="dias-semana">
+
+                    <div>Dom</div>
+                    <div>Seg</div>
+                    <div>Ter</div>
+                    <div>Qua</div>
+                    <div>Qui</div>
+                    <div>Sex</div>
+                    <div>Sáb</div>
+
+                </div>
+
+
+                <div
+                    id="diasCalendario"
+                    class="dias-calendario">
+                </div>
+
+
+            </div>
+
+
+
+            <!-- =================================================
+                 RELÓGIO
+            ================================================== -->
+
+            <div class="relogio-container">
+
+
+                <div class="relogio-titulo">
+
+                    Horário de Brasília
+
+                </div>
+
+
+                <div id="relogio">
+
+                    00:00:00
+
+                </div>
+
+
+                <div id="data"></div>
+
+
+            </div>
+
+
+
+            <!-- =================================================
+                 REDES SOCIAIS
+            ================================================== -->
+
+            <div class="redes-sociais">
+
+
+                <!-- LINKEDIN -->
+
+                <a
+                    href="https://www.linkedin.com/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="rede linkedin"
+                    aria-label="LinkedIn"
+                >
+
+
+                    <svg viewBox="0 0 24 24">
+
+                        <path
+                            d="M20.45 20.45h-3.56v-5.57
+                            c0-1.33-.03-3.04-1.85-3.04
+                            -1.85 0-2.14 1.45-2.14 2.94
+                            v5.67H9.34V9h3.42v1.56h.05
+                            c.48-.9 1.64-1.85 3.37-1.85
+                            3.6 0 4.27 2.37 4.27 5.46
+                            v6.28z
+                            M5.32 7.43
+                            a2.06 2.06 0 1 1 0-4.12
+                            2.06 2.06 0 0 1 0 4.12z
+                            M7.1 20.45H3.54V9H7.1v11.45z"
+                        />
+
+                    </svg>
+
+
+                    <span>
+                        LinkedIn
+                    </span>
+
+
+                </a>
+
+
+
+                <!-- INSTAGRAM -->
+
+                <a
+                    href="https://www.instagram.com/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="rede instagram"
+                    aria-label="Instagram"
+                >
+
+
+                    <svg viewBox="0 0 24 24">
+
+                        <path
+                            d="M7.75 2h8.5
+                            C19.43 2 22 4.57 22 7.75
+                            v8.5
+                            C22 19.43 19.43 22 16.25 22
+                            h-8.5
+                            C4.57 22 2 19.43 2 16.25
+                            v-8.5
+                            C2 4.57 4.57 2 7.75 2zm0 2
+                            C5.68 4 4 5.68 4 7.75
+                            v8.5
+                            C4 18.32 5.68 20 7.75 20
+                            h8.5
+                            C18.32 20 20 18.32 20 16.25
+                            v-8.5
+                            C20 5.68 18.32 4 16.25 4
+                            h-8.5zm8.75 1.5
+                            a1.25 1.25 0 1 1 0 2.5
+                            1.25 1.25 0 0 1 0-2.5z
+                            M12 7
+                            a5 5 0 1 1 0 10
+                            5 5 0 0 1 0-10zm0 2
+                            a3 3 0 1 0 0 6
+                            3 3 0 0 0 0-6z"
+                        />
+
+                    </svg>
+
+
+                    <span>
+                        Instagram
+                    </span>
+
+
+                </a>
+
+
+            </div>
+
+
+
+            <!-- =================================================
+                 RODAPÉ
+            ================================================== -->
+
+            <footer>
+
+                Feito por Viviane • 2026
+
+            </footer>
+
+
+        </section>
+
+
+    </main>
+
+
+
+    <!-- =====================================================
+         JAVASCRIPT
+    ====================================================== -->
+
+    <script>
+
+
+        /* =====================================================
+           ANIMAÇÃO DO NOME
+        ====================================================== */
+
+        const nome =
+            "Viviane";
+
+
+        const elementoViviane =
+            document.getElementById(
+                "viviane"
+            );
+
+
+        let letraAtual =
+            0;
+
+
+        let temporizadorDigitacao;
+
+
+
+        function escreverNome() {
+
+
+            if (
+                letraAtual <
+                nome.length
+            ) {
+
+
+                elementoViviane.textContent +=
+                    nome.charAt(
+                        letraAtual
+                    );
+
+
+                letraAtual++;
+
+
+                temporizadorDigitacao =
+                    setTimeout(
+                        escreverNome,
+                        180
+                    );
+
+
+            } else {
+
+
+                elementoViviane
+                    .classList
+                    .add(
+                        "brilho"
+                    );
+
+
+                setTimeout(
+
+                    function () {
+
+
+                        elementoViviane
+                            .classList
+                            .remove(
+                                "brilho"
+                            );
+
+
+                    },
+
+                    1300
+
+                );
+
+            }
+
+        }
+
+
+
+        function reiniciarAnimacaoNome() {
+
+
+            clearTimeout(
+                temporizadorDigitacao
+            );
+
+
+            elementoViviane.textContent =
+                "";
+
+
+            elementoViviane
+                .classList
+                .remove(
+                    "brilho"
+                );
+
+
+            letraAtual =
+                0;
+
+
+            escreverNome();
+
+        }
+
+
+
+        escreverNome();
+
+
+
+        setInterval(
+
+            reiniciarAnimacaoNome,
+
+            10000
+
+        );
+
+
+
+        /* =====================================================
+           RELÓGIO DE BRASÍLIA
+        ====================================================== */
+
+        function atualizarRelogio() {
+
+
+            const agora =
+                new Date();
+
+
+
+            const horarioBrasilia =
+                agora.toLocaleTimeString(
+
+                    "pt-BR",
+
+                    {
+
+                        timeZone:
+                            "America/Sao_Paulo",
+
+                        hour:
+                            "2-digit",
+
+                        minute:
+                            "2-digit",
+
+                        second:
+                            "2-digit"
+
+                    }
+
+                );
+
+
+            document
+                .getElementById(
+                    "relogio"
+                )
+                .textContent =
+                horarioBrasilia;
+
+
+
+            let dataBrasilia =
+                agora.toLocaleDateString(
+
+                    "pt-BR",
+
+                    {
+
+                        timeZone:
+                            "America/Sao_Paulo",
+
+                        weekday:
+                            "long",
+
+                        day:
+                            "2-digit",
+
+                        month:
+                            "long",
+
+                        year:
+                            "numeric"
+
+                    }
+
+                );
+
+
+            dataBrasilia =
+
+                dataBrasilia
+                    .charAt(0)
+                    .toUpperCase()
+
+                +
+
+                dataBrasilia
+                    .slice(1);
+
+
+
+            document
+                .getElementById(
+                    "data"
+                )
+                .textContent =
+                dataBrasilia;
+
+        }
+
+
+        atualizarRelogio();
+
+
+        setInterval(
+
+            atualizarRelogio,
+
+            1000
+
+        );
+
+
+
+        /* =====================================================
+           CALENDÁRIO
+        ====================================================== */
+
+        const tituloCalendario =
+            document.getElementById(
+                "tituloCalendario"
+            );
+
+
+        const diasCalendario =
+            document.getElementById(
+                "diasCalendario"
+            );
+
+
+        const nomesMeses = [
+
+            "Janeiro",
+            "Fevereiro",
+            "Março",
+            "Abril",
+            "Maio",
+            "Junho",
+            "Julho",
+            "Agosto",
+            "Setembro",
+            "Outubro",
+            "Novembro",
+            "Dezembro"
+
+        ];
+
+
+        const agoraInicial =
+            new Date();
+
+
+        const dataBrasiliaInicial =
+            new Date(
+
+                agoraInicial.toLocaleString(
+                    "en-US",
+                    {
+                        timeZone:
+                            "America/Sao_Paulo"
+                    }
+                )
+
+            );
+
+
+        let anoCalendario =
+            dataBrasiliaInicial.getFullYear();
+
+
+        let mesCalendario =
+            dataBrasiliaInicial.getMonth();
+
+
+
+        function desenharCalendario() {
+
+
+            tituloCalendario.textContent =
+                nomesMeses[mesCalendario]
+                +
+                " de "
+                +
+                anoCalendario;
+
+
+            diasCalendario.innerHTML =
+                "";
+
+
+            const primeiroDia =
+                new Date(
+                    anoCalendario,
+                    mesCalendario,
+                    1
+                ).getDay();
+
+
+            const quantidadeDias =
+                new Date(
+                    anoCalendario,
+                    mesCalendario + 1,
+                    0
+                ).getDate();
+
+
+            const agora =
+                new Date();
+
+
+            const hojeBrasilia =
+                new Date(
+
+                    agora.toLocaleString(
+                        "en-US",
+                        {
+                            timeZone:
+                                "America/Sao_Paulo"
+                        }
+                    )
+
+                );
+
+
+            for (
+                let i = 0;
+                i < primeiroDia;
+                i++
+            ) {
+
+
+                const vazio =
+                    document.createElement(
+                        "div"
+                    );
+
+
+                vazio.classList.add(
+                    "dia",
+                    "vazio"
+                );
+
+
+                diasCalendario.appendChild(
+                    vazio
+                );
+
+            }
+
+
+            for (
+                let dia = 1;
+                dia <= quantidadeDias;
+                dia++
+            ) {
+
+
+                const elementoDia =
+                    document.createElement(
+                        "div"
+                    );
+
+
+                elementoDia.classList.add(
+                    "dia"
+                );
+
+
+                elementoDia.textContent =
+                    dia;
+
+
+                if (
+
+                    dia ===
+                    hojeBrasilia.getDate()
+
+                    &&
+
+                    mesCalendario ===
+                    hojeBrasilia.getMonth()
+
+                    &&
+
+                    anoCalendario ===
+                    hojeBrasilia.getFullYear()
+
+                ) {
+
+
+                    elementoDia
+                        .classList
+                        .add(
+                            "hoje"
+                        );
+
+                }
+
+
+                diasCalendario.appendChild(
+                    elementoDia
+                );
+
+            }
+
+        }
+
+
+
+        document
+            .getElementById(
+                "mesAnterior"
+            )
+            .addEventListener(
+
+                "click",
+
+                function () {
+
+
+                    mesCalendario--;
+
+
+                    if (
+                        mesCalendario < 0
+                    ) {
+
+
+                        mesCalendario =
+                            11;
+
+
+                        anoCalendario--;
+
+                    }
+
+
+                    desenharCalendario();
+
+                }
+
+            );
+
+
+
+        document
+            .getElementById(
+                "mesSeguinte"
+            )
+            .addEventListener(
+
+                "click",
+
+                function () {
+
+
+                    mesCalendario++;
+
+
+                    if (
+                        mesCalendario > 11
+                    ) {
+
+
+                        mesCalendario =
+                            0;
+
+
+                        anoCalendario++;
+
+                    }
+
+
+                    desenharCalendario();
+
+                }
+
+            );
+
+
+
+        document
+            .getElementById(
+                "anoAnterior"
+            )
+            .addEventListener(
+
+                "click",
+
+                function () {
+
+
+                    anoCalendario--;
+
+
+                    desenharCalendario();
+
+                }
+
+            );
+
+
+
+        document
+            .getElementById(
+                "anoSeguinte"
+            )
+            .addEventListener(
+
+                "click",
+
+                function () {
+
+
+                    anoCalendario++;
+
+
+                    desenharCalendario();
+
+                }
+
+            );
+
+
+
+        desenharCalendario();
+
+
+
+        /* =====================================================
+           TEMA CLARO / ESCURO
+        ====================================================== */
+
+        const botaoTema =
+            document.getElementById(
+                "botaoTema"
+            );
+
+
+        botaoTema.addEventListener(
+
+            "click",
+
+            function () {
+
+
+                document
+                    .body
+                    .classList
+                    .toggle(
+                        "dark"
+                    );
+
+
+
+                if (
+
+                    document
+                        .body
+                        .classList
+                        .contains(
+                            "dark"
+                        )
+
+                ) {
+
+
+                    botaoTema.textContent =
+                        "☀";
+
+
+                } else {
+
+
+                    botaoTema.textContent =
+                        "☾";
+
+                }
+
+            }
+
+        );
+
+
+    </script>
+
+
+</body>
+
+</html>
