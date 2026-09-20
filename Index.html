@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Bem-vinda, Viviane!</title>
+
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            background-color: #f4f7fb;
+
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        .container {
+            text-align: center;
+            padding: 40px;
+        }
+
+        .texto {
+            font-size: 32px;
+            color: #263238;
+        }
+
+        #viviane {
+            display: block;
+
+            margin: 15px 0;
+
+            font-size: 72px;
+            font-weight: bold;
+
+            color: #17375e;
+
+            min-height: 85px;
+        }
+
+        .cursor {
+            border-right: 4px solid #17375e;
+            animation: piscar 0.7s infinite;
+        }
+
+        @keyframes piscar {
+            0%, 50% {
+                border-color: #17375e;
+            }
+
+            51%, 100% {
+                border-color: transparent;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <div class="texto">
+            Seja bem-vinda
+
+            <span id="viviane" class="cursor"></span>
+
+            ao mundo da programação.
+        </div>
+
+    </div>
+
+
+    <script>
+
+        const nome = "Viviane";
+
+        const elemento = document.getElementById("viviane");
+
+        let letraAtual = 0;
+
+
+        function escreverNome() {
+
+            if (letraAtual < nome.length) {
+
+                elemento.textContent += nome.charAt(letraAtual);
+
+                letraAtual++;
+
+                setTimeout(escreverNome, 250);
+            }
+
+        }
+
+
+        escreverNome();
+
+    </script>
+
+</body>
+</html>
